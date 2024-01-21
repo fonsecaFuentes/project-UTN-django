@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    {% if messages %}
+    <div class="alert alert-success mt-4">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form action="" method="POST" class="card card-body">
+                <form action="" method="post">
+                    <h2 class="text-center">Iniciar Sesión</h2>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-dark">Iniciar Sesión</button>
+                </form>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

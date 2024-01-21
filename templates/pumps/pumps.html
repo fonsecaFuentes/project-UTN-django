@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+<section class="mt-4 mb-4">
+    <div class="container">
+        <div class="row">
+            {% for pump in pumps_list %}
+                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card shadow p-1" style="width: 100%;">
+                        <img src="{{ pump.image.url }}" class="card-img-top" alt="{{ pump.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal">
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Bomba {{ pump.tag }}</li>
+                            <li class="list-group-item">Tipo de bomba: {{ pump.types }}</li>
+                            <li class="list-group-item">Modelo de Bomba: {{ pump.model }}</li>
+                            <li class="list-group-item">Fabricante: {{ pump.brand }}</li>
+                            <li class="list-group-item">Descripción: {{ pump.description }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Modal para la imagen de bomba -->
+                <div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="{{ pump.image.url }}" class="img-fluid" alt="{{ pump.image.url }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

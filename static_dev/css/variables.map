@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "variables.css",
+	"sources": [
+		"../scss/variables.scss"
+	],
+	"sourcesContent": [
+		"$text: #FB4570;\n$background: #B2D7DA;\n"
+	],
+	"names": [],
+	"mappings": ""
+}

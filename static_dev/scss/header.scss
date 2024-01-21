@@ -1,0 +1,14 @@
+body {
+    background-color: $background;
+}
+
+.title {
+    text-align: center;
+}
+
+.users, .exit {
+    color: $text;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,19 @@
+/* line 1, ../django/pump_manager/static_dev/scss/header.scss */
+body {
+  background-color: #B2D7DA;
+}
+
+/* line 5, ../django/pump_manager/static_dev/scss/header.scss */
+.title {
+  text-align: center;
+}
+
+/* line 9, ../django/pump_manager/static_dev/scss/header.scss */
+.users, .exit {
+  color: #FB4570;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/*# sourceMappingURL=header.css.map */

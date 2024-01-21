@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+<section class="mt-4 mb-4">
+    <div class="container">
+        <div class="row">
+            {% for coupling in coupling_list %}
+                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card shadow p-1" style="width: 100%;">
+                        <img src="{{ coupling.image.url }}" class="card-img-top" alt="{{ coupling.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal">
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Serie: {{ coupling.series }}</li>
+                            <li class="list-group-item">Modelo de acople: {{ coupling.model }}</li>
+                            <li class="list-group-item">Fabricante: {{ coupling.brand }}</li>
+                            <li class="list-group-item">Descripción: {{ coupling.description }}</li>
+                            <li class="list-group-item">Medida eje lado motor: {{ coupling.motor_side_measure }}</li>
+                            <li class="list-group-item">Medida eje lado bomba: {{ coupling.pump_side_sizer }}</li>
+                            <li class="list-group-item">Medida chaveta lado motor: {{ coupling.motor_key_measure }}</li>
+                            <li class="list-group-item">Medida chaveta lado bomba: {{ coupling.pump_key_measure }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Modal para la imagen de bomba -->
+                <div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="{{ coupling.image.url }}" class="img-fluid" alt="{{ coupling.image.url }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+<section class="mt-4 mb-4">
+    <div class="container">
+        <div class="row">
+            {% for engine in engine_list %}
+                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card shadow p-1" style="width: 100%;">
+                        <img src="{{ engine.image.url }}" class="card-img-top" alt="{{ engine.tag }}">
+                    </div>
+                    <div class="card mt-3" style="width: 100%;">
+                        <ul class="list-group list-group-flush m-2">
+                            <li class="list-group-item">Carcaza: {{ engine.quiver }}</li>
+                            <li class="list-group-item">HP: {{ engine.hp }}</li>
+                            <li class="list-group-item">RPM: {{ engine.rpm }}</li>
+                            <li class="list-group-item">Fabricante: {{ engine.brand }}</li>
+                            <li class="list-group-item">Descripción: {{ engine.description }}</li>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label mr-2" for="antiexplosive">Antiexplosivo</label>
+                                    <input type="checkbox" class="form-check-input" id="antiexplosive" {% if motor.antiexplosive %}checked{% endif %} disabled>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+
+{% block content %}
+
+<section class="m-3">
+    <h2 class="title">{{ title }}</h2>
+    <nav class="navbar navbar-expand-lg rounded navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="btn btn-light" href="">+</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="ms-auto">
+                <form class="d-flex" role="search" method="get">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Buscar" value="">
+                    <button class="btn btn-light me-2" type="submit">Buscar</button>
+                    <button class="btn btn-warning" id="clear-button">Limpiar</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</section>
+
+{% endblock %}
