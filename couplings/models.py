@@ -22,9 +22,6 @@ class Coupling(models.Model):
         max_length=100, choices=coupling_type, default='Elástico', blank=True
     )
     series = models.CharField(max_length=100, blank=True)
-    motor_side_measure = models.PositiveIntegerField(
-        blank=True, null=True, help_text="millimeters (mm)"
-    )
 
     # medidas mecanizado eje del lado bomba y motor
     # medida bomba

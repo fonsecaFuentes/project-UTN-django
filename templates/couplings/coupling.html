@@ -12,20 +12,20 @@
                     <div class="card shadow p-1" style="width: 100%;">
                         <img src="{{ coupling.image.url }}" class="card-img-top" alt="{{ coupling.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal">
                     </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
+                    <div class="card mt-3" style="width: 100%;">
+                        <ul class="list-group list-group-flush m-2">
                             <li class="list-group-item">Serie: {{ coupling.series }}</li>
-                            <li class="list-group-item">Modelo de acople: {{ coupling.model }}</li>
+                            <li class="list-group-item">Modelo de acople: {{ coupling.types }}</li>
                             <li class="list-group-item">Fabricante: {{ coupling.brand }}</li>
                             <li class="list-group-item">Descripción: {{ coupling.description }}</li>
-                            <li class="list-group-item">Medida eje lado motor: {{ coupling.motor_side_measure }}</li>
-                            <li class="list-group-item">Medida eje lado bomba: {{ coupling.pump_side_sizer }}</li>
-                            <li class="list-group-item">Medida chaveta lado motor: {{ coupling.motor_key_measure }}</li>
-                            <li class="list-group-item">Medida chaveta lado bomba: {{ coupling.pump_key_measure }}</li>
+                            <li class="list-group-item">Medida eje lado motor: {{ coupling.engine_shaft_measurement }} mm</li>
+                            <li class="list-group-item">Medida eje lado bomba: {{ coupling.pump_shaft_measurement }} mm</li>
+                            <li class="list-group-item">Medidas chaveta lado motor: {{ coupling.high_motor_key_size }} - {{ coupling.width_motor_key_size }} - {{ coupling.long_motor_key_size }} (alto - ancho - largo)</li>
+                            <li class="list-group-item">Medidas chaveta lado bomba: {{ coupling.high_pump_key_size }} - {{ coupling.width_pump_key_size }} - {{ coupling.long_pump_key_size }} (alto - ancho - largo)</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Modal para la imagen de bomba -->
+                <!-- Modal para la imagen de acople -->
                 <div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">

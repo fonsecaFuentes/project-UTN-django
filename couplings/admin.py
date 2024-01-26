@@ -10,18 +10,44 @@ class CouplingAdmin(admin.ModelAdmin):
             'Datos Generales', {
                 'fields': [
                     'pump', 'motor', 'brand', 'types', 'series',
-                    'pump_shaft_measurement', 'engine_shaft_measurement',
-                    'high_pump_key_size', 'width_pump_key_size',
-                    'long_pump_key_size', 'high_motor_key_size',
-                    'width_motor_key_size', 'long_motor_key_size',
                     'description', 'image'
                 ]
             }
-        )
+        ),
+        (
+            'Medida eje bomba', {
+                'fields': [
+                    'pump_shaft_measurement',
+                ]
+            }
+        ),
+        (
+            'Medidas de chaveta Bomba', {
+                'fields': [
+                    'high_pump_key_size', 'width_pump_key_size',
+                    'long_pump_key_size'
+                ],
+            }
+        ),
+        (
+            'Medida eje motor', {
+                'fields': [
+                    'engine_shaft_measurement',
+                ]
+            }
+        ),
+        (
+            'Medidas de chaveta Motor', {
+                'fields': [
+                    'high_motor_key_size', 'width_motor_key_size',
+                    'long_motor_key_size'
+                ],
+            }
+        ),
     ]
 
     list_display = [
-        'series', 'types', 'coupling_type', 'engine_keyway', 'pump_keyway',
+        'series', 'coupling_type', 'engine_keyway', 'pump_keyway',
         'image', 'upper_case_name',
     ]
 

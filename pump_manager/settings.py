@@ -32,9 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # apps terceros
     'django.contrib.sites',
     'registration',
+
     # Apps predeterminadas de Django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,12 +43,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # apps terceros
+    'captcha',
+
     # Apps personales
     'app_user',
     'pump_care',
     'pumps',
     'motors',
     'couplings',
+    'contact',
     'bearings',
     'seals',
 

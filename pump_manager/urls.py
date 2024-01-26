@@ -30,6 +30,8 @@ urlpatterns = [
     path('accounts/', include('registration.backends.default.urls')),
     path('admin/', admin.site.urls),
     path('users/', include('app_user.urls')),
+    path('captcha/', include('captcha.urls')),
+    path('contact/', include('contact.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

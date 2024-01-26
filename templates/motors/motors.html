@@ -7,18 +7,18 @@
 <section class="mt-4 mb-4">
     <div class="container">
         <div class="row">
-            {% for engine in engine_list %}
+            {% for motor in motors_list %}
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <div class="card shadow p-1" style="width: 100%;">
-                        <img src="{{ engine.image.url }}" class="card-img-top" alt="{{ engine.tag }}">
+                        <img src="{{ motor.image.url }}" class="card-img-top" alt="{{ motor.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal">
                     </div>
                     <div class="card mt-3" style="width: 100%;">
                         <ul class="list-group list-group-flush m-2">
-                            <li class="list-group-item">Carcaza: {{ engine.quiver }}</li>
-                            <li class="list-group-item">HP: {{ engine.hp }}</li>
-                            <li class="list-group-item">RPM: {{ engine.rpm }}</li>
-                            <li class="list-group-item">Fabricante: {{ engine.brand }}</li>
-                            <li class="list-group-item">Descripción: {{ engine.description }}</li>
+                            <li class="list-group-item">Carcaza: {{ motor.quiver }}</li>
+                            <li class="list-group-item">HP: {{ motor.hp }}</li>
+                            <li class="list-group-item">RPM: {{ motor.rpm }}</li>
+                            <li class="list-group-item">Fabricante: {{ motor.brand }}</li>
+                            <li class="list-group-item">Descripción: {{ motor.description }}</li>
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label mr-2" for="antiexplosive">Antiexplosivo</label>
@@ -28,6 +28,17 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+            <!-- Modal para la imagen de motor -->
+            <div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img src="{{ motor.image.url }}" class="img-fluid" alt="{{ motor.image.url }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
