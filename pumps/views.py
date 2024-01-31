@@ -7,14 +7,20 @@ from seals.models import PumpSeal
 from .models import MechanicalSeal
 
 
-# Create your views here.
-def pumps(request):
+def list_pumps(request):
     pumps_list = Pumps.objects.all()
     motor_list = Motor.objects.all()
     coupling_list = Coupling.objects.all()
     bearing_list = PumpBearing.objects.all()
     seal_list = PumpSeal.objects.all()
     mechanicalSeal_list = MechanicalSeal.objects.all()
+
+    for pump in pumps_list:
+        pump.has_motor = Motor.objects.filter(pump=pump).exists()
+        pump.has_coupling = Coupling.objects.filter(pump=pump).exists()
+        pump.has_bearing = PumpBearing.objects.filter(pump=pump).exists()
+        pump.has_seal = PumpSeal.objects.filter(pump=pump).exists()
+        pump.has_mechanicalSeal = pump.mechanicalseal_set.exists()
 
     context = {
         'title': 'Bombas',

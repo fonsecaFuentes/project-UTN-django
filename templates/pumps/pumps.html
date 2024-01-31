@@ -4,26 +4,86 @@
 
 {% include 'nav.html' %}
 
+{% load static %}
 <section class="mt-4 mb-4">
-    <div class="container">
-        <div class="row">
+    <div class="col-md-8">
+        <div class="card m-3">
             {% for pump in pumps_list %}
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <div class="card shadow p-1" style="width: 100%;">
-                        <img src="{{ pump.image.url }}" class="card-img-top" alt="{{ pump.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal">
+                <div class="row m-3">
+                    <!-- Columna de la Imagen -->
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <img src="{{ pump.image.url }}" class="img-thumbnail image-pump" alt="{{ pump.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ pump.id }}">
+                        </div>
                     </div>
-                    <div class="card mt-3" style="width: 100%;">
-                        <ul class="list-group list-group-flush m-2">
-                            <li class="list-group-item">Bomba {{ pump.tag }}</li>
-                            <li class="list-group-item">Tipo de bomba: {{ pump.types }}</li>
-                            <li class="list-group-item">Modelo de Bomba: {{ pump.model }}</li>
-                            <li class="list-group-item">Fabricante: {{ pump.brand }}</li>
-                            <li class="list-group-item">Descripción: {{ pump.description }}</li>
-                        </ul>
+                    <!-- Columna de los Campos -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong class="objectTitle">Bomba {{ pump.tag }}</strong></li>
+                                <li class="list-group-item">Modelo de Bomba: {{ pump.model }}</li>
+                                {% if not pump.has_bearing %}
+                                <hr>
+                                <li class="list-group-item">No hay rodamientos disponibles.</li>
+                                <hr>
+                                {% else %}
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong class="objectTitle">Rodaminetos de Bomba {{ pump.tag }}</strong></li>
+                                {% for bearing in pump.bearings.all %}
+                                    {% if bearing.bearing.side == 'rodamiento delantero' %}
+                                        <li class="list-group-item">Rodamientos delanteros: {{ bearing.bearing.number_reference }}</li>
+                                    {% endif %}
+                                    {% if bearing.bearing.side == 'rodamiento trasero' %}
+                                        <li class="list-group-item">Rodamientos traseros: {{ bearing.bearing.number_reference }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                {% if not pump.has_mechanicalSeal %}
+                                <hr>
+                                <li class="list-group-item">No hay sello mecánico disponible.</li>
+                                <hr>
+                                {% else %}
+                                <li class="list-group-item"><strong class="objectTitle">Sello de Bomba {{ pump.tag }}</strong></li>
+                                {% for mechanicalseal in pump.mechanicalseal_set.all %}
+                                    <li class="list-group-item">Medida sello mecánico: {{mechanicalseal.extention}} mm</li>
+                                {% endfor %}
+                                {% endif %}
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                {% if not pump.has_seal %}
+                                <hr>
+                                <li class="list-group-item">No hay retenes disponibles.</li>
+                                <hr>
+                                {% else %}
+                                <li class="list-group-item"><strong class="objectTitle">Retenes de Bomba {{ pump.tag }}</strong></li>
+                                {% for seal in pump.seal.all %}
+                                    {% if seal.seal.side == 'reten delantero' %}
+                                        <li class="list-group-item">Retenes delanteros: {{ seal.seal.inner_diameter }} mm - {{ seal.seal.outer_diameter }} mm - {{ seal.seal.broad }} mm</li>
+                                    {% endif %}
+                                    {% if seal.seal.side == 'reten trasero' %}
+                                        <li class="list-group-item">Retenes traseros: {{ seal.seal.inner_diameter }} mm - {{ seal.seal.outer_diameter }} mm - {{ seal.seal.broad }} mm</li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Columna de la Descripción -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="list-group-item"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ pump.description }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Modal para la imagen de bomba -->
-                <div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="imagenModal{{ pump.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -34,6 +94,9 @@
                 </div>
             {% endfor %}
         </div>
+    </div>
+    <div class="col-md-10">
+
     </div>
 </section>
 

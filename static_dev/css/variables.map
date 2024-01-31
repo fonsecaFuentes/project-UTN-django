@@ -5,7 +5,7 @@
 		"../scss/variables.scss"
 	],
 	"sourcesContent": [
-		"$text: #FB4570;\n$background: #B2D7DA;\n"
+		"$text: #FB4570;\r\n$background: #B2D7DA;\r\n"
 	],
 	"names": [],
 	"mappings": ""
