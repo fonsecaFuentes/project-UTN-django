@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+{% load static %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form action="{% url 'addPump' %}" method="POST" enctype="multipart/form-data" class="card card-body shadow p-3">
+                <h2 class="text-center">Agregar Bomba</h2>
+                <code><a href="{% url 'pumps' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+                <hr>
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-dark btn-lg">
+                    Agregar
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -23,9 +23,9 @@ class BearingAdmin(admin.ModelAdmin):
         (
             'Datos Generales', {
                 'fields': [
-                    'side', 'types', 'number_reference',
+                    'side', 'types', 'brand', 'number_reference',
                     'inner_diameter', 'outer_diameter',
-                    'brand', 'description', 'image'
+                    'broad', 'description', 'image'
                 ]
             }
         )

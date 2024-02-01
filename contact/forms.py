@@ -1,10 +1,9 @@
-# from django import forms
-from django.forms import ModelForm
+from django import forms
 from captcha.fields import CaptchaField
 from .models import Consult
 
 
-class ConsultForm(ModelForm):
+class ConsultForm(forms.ModelForm):
     captcha = CaptchaField()
 
     class Meta:
@@ -15,6 +14,21 @@ class ConsultForm(ModelForm):
             'email',
             'telephone',
         ]
+        labels = {
+            'name': 'Nombre',
+            'description': 'Comentario',
+            'email': 'Email',
+            'telephone': 'Telefono',
+        }
+        help_texts = {
+            'telephone': 'Ingrese el número sin guiones ni espacios.',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'telephone': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
 
     def send_email(self):
         name = self.cleaned_data['name']

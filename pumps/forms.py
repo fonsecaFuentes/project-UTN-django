@@ -3,7 +3,7 @@ from .models import Pumps
 from .models import MechanicalSeal
 
 
-class ConsultForm(forms.ModelForm):
+class PumpsForm(forms.ModelForm):
     class Meta:
         model = Pumps
         fields = [
@@ -21,6 +21,17 @@ class ConsultForm(forms.ModelForm):
             'types': 'Tipo de Bomba',
             'description': 'Descripción',
             'image': 'Imagen de la Bomba',
+        }
+
+        widgets = {
+            'tag': forms.TextInput(attrs={'class': 'form-control'}),
+            'brand': forms.TextInput(attrs={'class': 'form-control'}),
+            'model': forms.TextInput(attrs={'class': 'form-control'}),
+            'types': forms.Select(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': 3}
+            ),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
 

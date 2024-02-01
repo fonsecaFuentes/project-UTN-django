@@ -181,15 +181,15 @@ class Packing(models.Model):
     def kind_of_material(self):
         if self.material == 'Asbesto':
             return format_html(
-                '<span style="color: #D435BC;">{}</span>', self.types
+                '<span style="color: #D435BC;">{}</span>', self.material
             )
         elif self.material == 'Teflon':
             return format_html(
-                '<span style="color: #A135D4;">{}</span>', self.types
+                '<span style="color: #A135D4;">{}</span>', self.material
             )
         elif self.material == 'Grafito':
             return format_html(
-                '<span style="color: #FF5733;">{}</span>', self.types
+                '<span style="color: #FF5733;">{}</span>', self.material
             )
 
     class Meta:

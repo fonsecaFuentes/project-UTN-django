@@ -98,4 +98,8 @@ class PackingSealAdmin(admin.ModelAdmin):
 
     @admin.display(description='Datos')
     def upper_case_name(self, obj):
-        return ("%s %s" % (obj.extention, obj.pump.tag)).upper()
+        return (
+            "Medida de empaquetadura: %s mm - Bomba %s" % (
+                obj.extention, obj.pump.tag
+            )
+        ).upper()
