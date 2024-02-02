@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="container mt-4">
+    <div class="p-2 mb-2 bg-light rounded-2 border">
+      <h1 class="display-3">Detalles de Bomba {{ pump.tag }}</h1>
+      <p class="lead">Incluye los detalles del Acople y Motor.</p>
+      <code><a href="{% url 'pumps' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+    </div>
+  </div>
+
+<section class="mt-4 mb-4">
+        <div class="col-md-12">
+            <div class="card m-2">
+                <div class="row m-3">
+                    <!-- Columna de la Imagen -->
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <img src="{{ pump.image.url }}" class="img-thumbnail image-pump" alt="{{ pump.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ pump.id }}">
+                        </div>
+                    </div>
+                    <!-- Columna de los campos del equipo -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- rodamientos -->
+                                {% if not pump.bearings.exists %}
+                                <p class="card-text text-danger">No hay rodamientos disponible.</p>
+                                <hr>
+                                {% else %}
+                                <p class="card-text"><strong class="objectTitle">Rodamientos</strong></p>
+                                <hr>
+                                <p class="card-text">Rodamientos Delanteros:
+                                    {% for bearing in pump.bearings.all %}
+                                        {% if bearing.bearing.side == 'rodamiento delantero' %}
+                                        <span class="badge bg-secondary">{{ bearing.bearing.number_reference }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <hr>
+                                <p class="card-text">Rodamientos Traseros:
+                                    {% for bearing in pump.bearings.all %}
+                                        {% if bearing.bearing.side == 'rodamiento trasero' %}
+                                        <span class="badge bg-secondary">{{ bearing.bearing.number_reference }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <hr>
+                                {% endif %}
+                                <!-- sello -->
+                                {% if pump.mechanicalseal_set.exists %}
+                                <p class="card-text"><strong class="objectTitle">Sello</strong></p>
+                                <hr>
+                                {% for mechanicalseal in pump.mechanicalseal_set.all %}
+                                <p class="card-text">Medida: {{mechanicalseal.extention}} mm</p>
+                                {% endfor %}
+                                <hr>
+                                <!-- empaquetadura -->
+                                {% elif pump.packing_set.exists %}
+                                <p class="card-text"><strong class="objectTitle">Empaquetadura</strong></p>
+                                <hr>
+                                {% for packing in pump.packing_set.all %}
+                                <p class="card-text">Medida: {{packing.extention}} mm</p>
+                                {% endfor %}
+                                <hr>
+                                {% else %}
+                                <p class="card-text text-danger">No hay sello o empaquetadura disponible.</p>
+                                <hr>
+                                {% endif %}
+                                <!-- retenes -->
+                                {% if not pump.seal.exists %}
+                                <p class="card-text text-danger">No hay retenes disponible.</p>
+                                <hr>
+                                {% else %}
+                                <p class="card-text"><strong class="objectTitle">Retenes</strong></p>
+                                <hr>
+                                {% for seal in pump.seal.all %}
+                                    {% if seal.seal.side == 'reten delantero' %}
+                                    <p class="card-text">Reten Delantero: {{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</p>
+                                    <hr>
+                                    {% endif %}
+                                    {% if seal.seal.side == 'reten trasero' %}
+                                    <p class="card-text">Reten Trasero: {{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</p>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Columna descripcion -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Datos de la Bomba</strong></p>
+                                <hr>
+                                <p class="card-text">Fabricante: {{pump.brand}}</p>
+                                <hr>
+                                <p class="card-text">Modelo: {{pump.model}}</p>
+                                <hr>
+                                <p class="card-text">Tipo: {{pump.types}}</p>
+                                <hr>
+                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ pump.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fila acople -->
+            <div class="card m-2">
+                <div class="row m-3">
+                    {% if not pump.coupling_set.exists %}
+                    <p class="card-text text-danger">No hay acople disponible.</p>
+                    {% else %}
+                    <!-- Columna de la Imagen -->
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <img src="{{ coupling.image.url }}" class="img-thumbnail image-pump" alt="{{ coupling.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ coupling.id }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                            <p class="card-text"><strong class="objectTitle">Acople</strong></p>
+                            <hr>
+                            <p class="card-text">Fabricante: {{ coupling.brand }}</p>
+                            <hr>
+                            <p class="card-text">Tipo: {{ coupling.types }}</p>
+                            <hr>
+                            <p class="card-text">Serie: {{ coupling.series }}</p>
+                            <hr>
+                            <p class="card-text"><strong class="objectTitle">Medidas ejes...</strong></p>
+                            <hr>
+                            <p class="card-text">Medida Eje Motor: {{coupling.engine_shaft_measurement}} mm</p>
+                            <hr>
+                            <p class="card-text">Medida Eje Bomba: {{coupling.pump_shaft_measurement}} mm</p>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Medidas chavetas...</strong></p>
+                                <hr>
+                                {% for coupling in pump.coupling_set.all %}
+                                <p class="card-text">Medida chaveta Motor: {{coupling.high_motor_key_size}} x {{coupling.width_motor_key_size}} x {{coupling.long_motor_key_size}} mm</p>
+                                <hr>
+                                <p class="card-text">Medida chaveta Bomba: {{coupling.high_pump_key_size}} x {{coupling.width_pump_key_size}} x {{coupling.long_pump_key_size}} mm</p>
+                                {% endfor %}
+                                <hr>
+                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ coupling.description }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- Fila motor -->
+            <div class="card m-2">
+                <div class="row m-3">
+                    {% if not pump.motor_set.exists %}
+                    <p class="card-text text-danger">No hay motor disponible.</p>
+                    {% else %}
+                    <!-- Columna de la Imagen -->
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <img src="{{ motor.image.url }}" class="img-thumbnail image-pump" alt="{{ motor.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ motor.id }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Motor</strong></p>
+                                <hr>
+                                <p class="card-text">Fabricante: {{ motor.brand }}</p>
+                                <hr>
+                                <p class="card-text">HP: {{ motor.hp }}</p>
+                                <hr>
+                                <p class="card-text">RPM: {{ motor.rpm }}</p>
+                                <hr>
+                                <p class="card-text">Carcasa: {{ motor.quiver }}</p>
+                                <hr>
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label mr-2" for="antiexplosive">Antiexplosivo</label>
+                                        <input type="checkbox" class="form-check-input" id="antiexplosive" {% if motor.antiexplosive %}checked{% endif %} disabled>
+                                    </div>
+                                </div>
+                                <hr>
+                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ motor.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- rodamientos -->
+                                {% if not motor_bearings.exists %}
+                                <p class="card-text text-danger">No hay rodamientos disponible.</p>
+                                <hr>
+                                {% else %}
+                                <p class="card-text"><strong class="objectTitle">Rodamientos</strong></p>
+                                <hr>
+                                <p class="card-text">Rodamientos Delanteros:
+                                    {% for motor_bearing in motor_bearings %}
+                                        {% if motor_bearing.bearing.side == 'rodamiento delantero' %}
+                                        <span class="badge bg-secondary">{{ motor_bearing.bearing.number_reference }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <hr>
+                                <p class="card-text">Rodamientos Traseros:
+                                    {% for motor_bearing in motor_bearings %}
+                                        {% if motor_bearing.bearing.side == 'rodamiento trasero' %}
+                                        <span class="badge bg-secondary">{{ motor_bearing.bearing.number_reference }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <hr>
+                                {% endif %}
+                                <!-- retenes -->
+                                {% if not motor_seals.exists %}
+                                <p class="card-text text-danger">No hay retenes disponible.</p>
+                                <hr>
+                                {% else %}
+                                <p class="card-text"><strong class="objectTitle">Retenes</strong></p>
+                                <hr>
+                                <p class="card-text">Reten Delantero:
+                                    {% for motor_seal in motor_seals %}
+                                        {% if motor_seal.seal.side == 'reten delantero' %}
+                                        <span class="badge bg-secondary">{{ motor_seal.seal.inner_diameter }} x {{ motor_seal.seal.outer_diameter }} x {{ motor_seal.seal.broad }} mm</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <hr>
+                                <p class="card-text">Reten Trasero:
+                                    {% for motor_seal in motor_seals %}
+                                        {% if motor_seal.seal.side == 'reten trasero' %}
+                                        <span class="badge bg-secondary">{{ motor_seal.seal.inner_diameter }} x {{ motor_seal.seal.outer_diameter }} x {{ motor_seal.seal.broad }} mm</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+{% endblock %}

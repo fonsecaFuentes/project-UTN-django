@@ -1,0 +1,6 @@
+UTN_DJANGO
+
+NOTAS A MODIFICAR:
+Formularios de registro y login de usuario
+Formularios de Contacto modificar mensaje de confirmacion
+Agregar Botones para volver o que los Formularios se carguen en un modal

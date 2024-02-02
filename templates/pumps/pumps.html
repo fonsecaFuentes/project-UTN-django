@@ -28,7 +28,7 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <p class="card-text"><strong class="objectTitle">Bomba {{ pump.tag }}</strong></p>
+                                <code><a href="{% url 'pump_detail' pump.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Bomba {{ pump.tag }}</strong></a></code>
                                 <hr>
                                 <!-- rodamientos -->
                                 {% if not pump.has_bearing %}
