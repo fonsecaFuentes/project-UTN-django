@@ -4,13 +4,15 @@
 
 {% load static %}
 
-<div class="container mt-4">
+<div class="container-fluid mt-3">
     <div class="p-2 mb-2 bg-light rounded-2 border">
-      <h1 class="display-3">Detalles de Bomba {{ pump.tag }}</h1>
-      <p class="lead">Incluye los detalles del Acople y Motor.</p>
-      <code><a href="{% url 'pumps' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+        <div class="container">
+            <h1 class="display-3">Detalles de Bomba {{ pump.tag }}</h1>
+            <p class="lead">Incluye los detalles del Acople y Motor.</p>
+            <code><a href="{% url 'pumps' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+        </div>
     </div>
-  </div>
+</div>
 
 <section class="mt-4 mb-4">
         <div class="col-md-12">
@@ -36,7 +38,7 @@
                                 <p class="card-text">Rodamientos Delanteros:
                                     {% for bearing in pump.bearings.all %}
                                         {% if bearing.bearing.side == 'rodamiento delantero' %}
-                                        <span class="badge bg-secondary">{{ bearing.bearing.number_reference }}</span>
+                                        <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>
                                         {% endif %}
                                     {% endfor %}
                                 </p>
@@ -44,7 +46,7 @@
                                 <p class="card-text">Rodamientos Traseros:
                                     {% for bearing in pump.bearings.all %}
                                         {% if bearing.bearing.side == 'rodamiento trasero' %}
-                                        <span class="badge bg-secondary">{{ bearing.bearing.number_reference }}</span>
+                                        <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>
                                         {% endif %}
                                     {% endfor %}
                                 </p>
@@ -55,7 +57,7 @@
                                 <p class="card-text"><strong class="objectTitle">Sello</strong></p>
                                 <hr>
                                 {% for mechanicalseal in pump.mechanicalseal_set.all %}
-                                <p class="card-text">Medida: {{mechanicalseal.extention}} mm</p>
+                                <p class="card-text">Medida: <span class="badge bg-secondary data">{{mechanicalseal.extention}} mm</span></p>
                                 {% endfor %}
                                 <hr>
                                 <!-- empaquetadura -->
@@ -63,7 +65,7 @@
                                 <p class="card-text"><strong class="objectTitle">Empaquetadura</strong></p>
                                 <hr>
                                 {% for packing in pump.packing_set.all %}
-                                <p class="card-text">Medida: {{packing.extention}} mm</p>
+                                <p class="card-text">Medida: <span class="badge bg-secondary data">{{packing.extention}} mm</span></p>
                                 {% endfor %}
                                 <hr>
                                 {% else %}
@@ -79,11 +81,11 @@
                                 <hr>
                                 {% for seal in pump.seal.all %}
                                     {% if seal.seal.side == 'reten delantero' %}
-                                    <p class="card-text">Reten Delantero: {{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</p>
+                                    <p class="card-text">Reten Delantero: <span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span></p>
                                     <hr>
                                     {% endif %}
                                     {% if seal.seal.side == 'reten trasero' %}
-                                    <p class="card-text">Reten Trasero: {{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</p>
+                                    <p class="card-text">Reten Trasero: <span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span></p>
                                     {% endif %}
                                 {% endfor %}
                                 {% endif %}
@@ -96,11 +98,11 @@
                             <div class="card-body">
                                 <p class="card-text"><strong class="objectTitle">Datos de la Bomba</strong></p>
                                 <hr>
-                                <p class="card-text">Fabricante: {{pump.brand}}</p>
+                                <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{pump.brand}}</span></p>
                                 <hr>
-                                <p class="card-text">Modelo: {{pump.model}}</p>
+                                <p class="card-text">Modelo: <span class="badge bg-secondary data">{{pump.model}}</span></p>
                                 <hr>
-                                <p class="card-text">Tipo: {{pump.types}}</p>
+                                <p class="card-text">Tipo: <span class="badge bg-secondary data">{{pump.types}}</span></p>
                                 <hr>
                                 <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
                                 <hr>
@@ -127,17 +129,17 @@
                             <div class="card-body">
                             <p class="card-text"><strong class="objectTitle">Acople</strong></p>
                             <hr>
-                            <p class="card-text">Fabricante: {{ coupling.brand }}</p>
+                            <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{ coupling.brand }}</span></p>
                             <hr>
-                            <p class="card-text">Tipo: {{ coupling.types }}</p>
+                            <p class="card-text">Tipo: <span class="badge bg-secondary data">{{ coupling.types }}</span></p>
                             <hr>
-                            <p class="card-text">Serie: {{ coupling.series }}</p>
+                            <p class="card-text">Serie: <span class="badge bg-secondary data">{{ coupling.series }}</span></p>
                             <hr>
                             <p class="card-text"><strong class="objectTitle">Medidas ejes...</strong></p>
                             <hr>
-                            <p class="card-text">Medida Eje Motor: {{coupling.engine_shaft_measurement}} mm</p>
+                            <p class="card-text">Medida Eje Motor: <span class="badge bg-secondary data">{{coupling.engine_shaft_measurement}} mm</span></p>
                             <hr>
-                            <p class="card-text">Medida Eje Bomba: {{coupling.pump_shaft_measurement}} mm</p>    
+                            <p class="card-text">Medida Eje Bomba: <span class="badge bg-secondary data">{{coupling.pump_shaft_measurement}} mm</span></p>    
                             </div>
                         </div>
                     </div>
@@ -147,9 +149,9 @@
                                 <p class="card-text"><strong class="objectTitle">Medidas chavetas...</strong></p>
                                 <hr>
                                 {% for coupling in pump.coupling_set.all %}
-                                <p class="card-text">Medida chaveta Motor: {{coupling.high_motor_key_size}} x {{coupling.width_motor_key_size}} x {{coupling.long_motor_key_size}} mm</p>
+                                <p class="card-text">Medida chaveta Motor: <span class="badge bg-secondary data">{{coupling.high_motor_key_size}} x {{coupling.width_motor_key_size}} x {{coupling.long_motor_key_size}} mm</span></p>
                                 <hr>
-                                <p class="card-text">Medida chaveta Bomba: {{coupling.high_pump_key_size}} x {{coupling.width_pump_key_size}} x {{coupling.long_pump_key_size}} mm</p>
+                                <p class="card-text">Medida chaveta Bomba: <span class="badge bg-secondary data">{{coupling.high_pump_key_size}} x {{coupling.width_pump_key_size}} x {{coupling.long_pump_key_size}} mm</span></p>
                                 {% endfor %}
                                 <hr>
                                 <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
@@ -178,13 +180,13 @@
                             <div class="card-body">
                                 <p class="card-text"><strong class="objectTitle">Motor</strong></p>
                                 <hr>
-                                <p class="card-text">Fabricante: {{ motor.brand }}</p>
+                                <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{ motor.brand }}</span></p>
                                 <hr>
-                                <p class="card-text">HP: {{ motor.hp }}</p>
+                                <p class="card-text">HP: <span class="badge bg-secondary data">{{ motor.hp }}</span></p>
                                 <hr>
-                                <p class="card-text">RPM: {{ motor.rpm }}</p>
+                                <p class="card-text">RPM: <span class="badge bg-secondary data">{{ motor.rpm }}</span></p>
                                 <hr>
-                                <p class="card-text">Carcasa: {{ motor.quiver }}</p>
+                                <p class="card-text">Carcasa: <span class="badge bg-secondary data">{{ motor.quiver }}</span></p>
                                 <hr>
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
@@ -212,7 +214,7 @@
                                 <p class="card-text">Rodamientos Delanteros:
                                     {% for motor_bearing in motor_bearings %}
                                         {% if motor_bearing.bearing.side == 'rodamiento delantero' %}
-                                        <span class="badge bg-secondary">{{ motor_bearing.bearing.number_reference }}</span>
+                                        <span class="badge bg-secondary data">{{ motor_bearing.bearing.number_reference }}</span>
                                         {% endif %}
                                     {% endfor %}
                                 </p>
@@ -220,7 +222,7 @@
                                 <p class="card-text">Rodamientos Traseros:
                                     {% for motor_bearing in motor_bearings %}
                                         {% if motor_bearing.bearing.side == 'rodamiento trasero' %}
-                                        <span class="badge bg-secondary">{{ motor_bearing.bearing.number_reference }}</span>
+                                        <span class="badge bg-secondary data">{{ motor_bearing.bearing.number_reference }}</span>
                                         {% endif %}
                                     {% endfor %}
                                 </p>
@@ -236,7 +238,7 @@
                                 <p class="card-text">Reten Delantero:
                                     {% for motor_seal in motor_seals %}
                                         {% if motor_seal.seal.side == 'reten delantero' %}
-                                        <span class="badge bg-secondary">{{ motor_seal.seal.inner_diameter }} x {{ motor_seal.seal.outer_diameter }} x {{ motor_seal.seal.broad }} mm</span>
+                                        <span class="badge bg-secondary data">{{ motor_seal.seal.inner_diameter }} x {{ motor_seal.seal.outer_diameter }} x {{ motor_seal.seal.broad }} mm</span>
                                         {% endif %}
                                     {% endfor %}
                                 </p>
@@ -244,7 +246,7 @@
                                 <p class="card-text">Reten Trasero:
                                     {% for motor_seal in motor_seals %}
                                         {% if motor_seal.seal.side == 'reten trasero' %}
-                                        <span class="badge bg-secondary">{{ motor_seal.seal.inner_diameter }} x {{ motor_seal.seal.outer_diameter }} x {{ motor_seal.seal.broad }} mm</span>
+                                        <span class="badge bg-secondary data">{{ motor_seal.seal.inner_diameter }} x {{ motor_seal.seal.outer_diameter }} x {{ motor_seal.seal.broad }} mm</span>
                                         {% endif %}
                                     {% endfor %}
                                 </p>

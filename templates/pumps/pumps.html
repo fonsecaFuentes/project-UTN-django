@@ -39,8 +39,8 @@
                                 <hr>
                                 <p class="card-text">Numeración:
                                 {% for bearing in pump.bearings.all %}
-                                    {% if bearing.bearing.side == 'rodamiento delantero' %}{{ bearing.bearing.number_reference }}{% endif %}
-                                    {% if bearing.bearing.side == 'rodamiento trasero' %}| {{ bearing.bearing.number_reference }}{% endif %}
+                                    {% if bearing.bearing.side == 'rodamiento delantero' %}<span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>{% endif %}
+                                    {% if bearing.bearing.side == 'rodamiento trasero' %}| <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>{% endif %}
                                 {% endfor %}
                                 </p>
                                 <hr>
@@ -50,7 +50,7 @@
                                 <p class="card-text"><strong class="objectTitle">Sello</strong></p>
                                 <hr>
                                 {% for mechanicalseal in pump.mechanicalseal_set.all %}
-                                <p class="card-text">Medida: {{mechanicalseal.extention}} mm</p>
+                                <p class="card-text">Medida: <span class="badge bg-secondary data">{{mechanicalseal.extention}} mm</span></p>
                                 {% endfor %}
                                 <hr>
                                 <!-- empaquetadura -->
@@ -58,7 +58,7 @@
                                 <p class="card-text"><strong class="objectTitle">Empaquetadura</strong></p>
                                 <hr>
                                 {% for packing in pump.packing_set.all %}
-                                <p class="card-text">Medida: {{packing.extention}} mm</p>
+                                <p class="card-text">Medida: <span class="badge bg-secondary data">{{packing.extention}} mm</span></p>
                                 {% endfor %}
                                 <hr>
                                 {% else %}
@@ -74,8 +74,8 @@
                                 <hr>
                                 <p class="card-text">Numeración:
                                 {% for seal in pump.seal.all %}
-                                    {% if seal.seal.side == 'reten delantero' %}{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm{% endif %}
-                                    {% if seal.seal.side == 'reten trasero' %}| {{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm{% endif %}
+                                    {% if seal.seal.side == 'reten delantero' %}<span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span>{% endif %}
+                                    {% if seal.seal.side == 'reten trasero' %}| <span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span>{% endif %}
                                 {% endfor %}
                                 </p>
                                 {% endif %}
@@ -94,9 +94,9 @@
                             <p class="card-text"><strong class="objectTitle">Acople</strong></p>
                             <hr>
                             {% for coupling in pump.coupling_set.all %}
-                                <p class="card-text">Medida Eje Motor: {{coupling.engine_shaft_measurement}} mm</p>
+                                <p class="card-text">Medida Eje Motor: <span class="badge bg-secondary data">{{coupling.engine_shaft_measurement}} mm</span></p>
                                 <hr>
-                                <p class="card-text">Medida Eje Bomba: {{coupling.pump_shaft_measurement}} mm</p>
+                                <p class="card-text">Medida Eje Bomba: <span class="badge bg-secondary data">{{coupling.pump_shaft_measurement}} mm</span></p>
                                 <hr>
                             {% endfor %}
                             {% endif %}
@@ -107,9 +107,9 @@
                             {% for motor in pump.motor_set.all %}
                                 <p class="card-text"><strong class="objectTitle">Motor</strong></p>
                                 <hr>
-                                <p class="card-text">HP: {{ motor.hp }}</p>
+                                <p class="card-text">HP: <span class="badge bg-secondary data">{{ motor.hp }}</span></p>
                                 <hr>
-                                <p class="card-text">RPM: {{ motor.rpm }}</p>
+                                <p class="card-text">RPM: <span class="badge bg-secondary data">{{ motor.rpm }}</span></p>
                                 <hr>
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
@@ -137,7 +137,7 @@
         {% endfor %}
     </div>
     <div class="col-md-3">
-        <div class="card">
+        <div class="card m-2">
             <div class="row m-3">
                 <h2>Obsevaciones</h2>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla cupiditate ea nisi ipsa neque ipsam possimus voluptatum. Laboriosam, in inventore, expedita accusamus quae atque optio earum iste voluptatum quas animi.</p>
