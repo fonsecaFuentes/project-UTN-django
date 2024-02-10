@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="container-fluid mt-3">
+    <div class="p-2 m-3 bg-light rounded-2 border">
+        <div class="container m-2">
+            <h1 class="display-3">Detalles Sellos Mecánico {{ mechanicalseal.pump.tag }}</h1>
+            <p class="lead">Incluye los detalles del Acople.</p>
+            <code><a href="{% url 'mechanical_seals' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+        </div>
+    </div>
+</div>
+
+<section class="mt-4 mb-4">
+    <div class="row m-2">
+        <div class="col-md-8">
+            <div class="card m-2">
+                <div class="row m-3">
+                    <!-- Columna de la Imagen -->
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <img src="{{ mechanicalseal.image.url }}" class="img-thumbnail image-motor" alt="{{ mechanicalseal.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ mechanicalseal.id }}">
+                        </div>
+                    </div>
+                    <!-- Columna de los campos del equipo -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Datos del Sello Mecánico</strong></p>
+                                <hr>
+                                <p class="card-text">Medida: <span class="badge bg-secondary data">{{ mechanicalseal.extention }}</span></p>
+                                <hr>
+                                <p class="card-text">Equipo: <span class="badge bg-secondary data">Sello de Bomba {{ mechanicalseal.pump.tag }}</span></p>
+                                <hr>
+                                <p class="card-text">Tipo: <span class="badge bg-secondary data">{{ mechanicalseal.types }}</span></p>
+                                <hr>
+                                <p class="card-text">Materiales: <span class="badge bg-secondary data">{{ mechanicalseal.material }}</span></p>
+                                <hr>
+                                <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{ mechanicalseal.brand }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Columna datos -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ mechanicalseal.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card m-2">
+                <div class="row m-3">
+                    <h2>Obsevaciones</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla cupiditate ea nisi ipsa neque ipsam possimus voluptatum. Laboriosam, in inventore, expedita accusamus quae atque optio earum iste voluptatum quas animi.</p>
+                </div>
+                <div class="row m-3">
+                    <h2>Tareas</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt repellendus saepe excepturi? Beatae tenetur ipsam, quo, maxime rerum minus tempora itaque repellendus, quisquam repellat non placeat quibusdam? Perspiciatis, mollitia exercitationem.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

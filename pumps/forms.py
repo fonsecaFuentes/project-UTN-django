@@ -16,11 +16,11 @@ class PumpsForm(forms.ModelForm):
         ]
         labels = {
             'tag': 'TAG',
-            'brand': 'Marca',
+            'brand': 'Fabricante',
             'model': 'Modelo',
             'types': 'Tipo de Bomba',
             'description': 'Descripción',
-            'image': 'Imagen de la Bomba',
+            'image': 'Imagen de Bomba',
         }
 
         widgets = {

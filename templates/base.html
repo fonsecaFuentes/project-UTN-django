@@ -22,25 +22,35 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'pumps' %}">Bombas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'motors' %}">Motores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'coupling' %}">Acoples</a>
+              </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Datos
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url 'pumps' %}">Bombas</a></li>
+                    <li><a class="dropdown-item" href="{% url 'bearings' %}">Rodamientos</a></li>
+                    <li><a class="dropdown-item" href="{% url 'seals' %}">Retenes</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'coupling' %}">Acoples</a></li>
-                    <li><a class="dropdown-item" href="{% url 'motors' %}">Motores</a></li>
+                    <li><a class="dropdown-item" href="{% url 'mechanical_seals' %}">Sellos</a></li>
+                    <li><a class="dropdown-item" href="{% url 'packing' %}">Empaquetaduras</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Tareas</a>
+                <a class="nav-link active" aria-current="page" href="#">Tareas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Observaciones</a>
+                <a class="nav-link active" aria-current="page" href="#">Observaciones</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contacto</a>
               </li>
             </ul>
           </div>

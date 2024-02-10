@@ -16,41 +16,36 @@
     <div class="row m-2">
         <div class="col-md-8">
             <div class="row">
-            {% for seal in seals_combined %}
+            {% for mechanicalseal in mechanicalseal_list %}
             <div class="col-md-6">
                 <div class="card m-2">
                     <div class="row m-3">
                         <!-- Columna de la Imagen -->
                         <div class="col-12 col-md-12 col-lg-6">
                             <div class="card shadow">
-                                <img src="{{ seal.seal.image.url }}" class="img-thumbnail image-seal" alt="{{ seal.seal.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ seal.seal.id }}">
+                                <img src="{{ mechanicalseal.image.url }}" class="img-thumbnail image-mechanicalseal" alt="{{ mechanicalseal.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ mechanicalseal.id }}">
                             </div>
                         </div>
                         <!-- Columna campos -->
                         <div class="col-12 col-md-12 col-lg-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <code class="data_name"><a href="{% url 'seal_detail' seal.seal.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">{{ seal.seal.types }}</strong></a></code>
+                                    <code class="data_name"><a href="{% url 'mechanicalseal_detail' mechanicalseal.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">{{ mechanicalseal.types }}</strong></a></code>
                                     <hr>
-                                    <p class="card-text"><strong class="objectTitle">Datos del Retem</strong></p>
+                                    <p class="card-text"><strong class="objectTitle">Datos del Sello Mecánico</strong></p>
+                                    <p class="card-text">Medida: <span class="badge bg-secondary data"> {{ mechanicalseal.extention }}</span></p>
                                     <hr>
-                                    <p class="card-text">Dimenciones: <span class="badge bg-secondary data"> {{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span></p>
-                                    <hr>
-                                    {% if seal.pump %}
-                                    <p class="card-text">Equipo: <span class="badge bg-secondary data">Bomba {{ seal.pump.tag }}</span></p>
-                                    {% else %}
-                                    <p class="card-text">Equipo: <span class="badge bg-secondary data">Motor de Bomba {{ seal.motor.pump.tag }}</span></p>
-                                    {% endif %}
+                                    <p class="card-text">Equipo: <span class="badge bg-secondary data">Bomba {{ mechanicalseal.pump.tag }}</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Modal para la imagen del rodamiento -->
-                    <div class="modal fade" id="imagenModal{{ seal.seal.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="imagenModal{{ mechanicalseal.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    <img src="{{ seal.seal.image.url }}" class="img-fluid" alt="{{ seal.seal.image.url }}">
+                                    <img src="{{ mechanicalseal.image.url }}" class="img-fluid" alt="{{ mechanicalseal.image.url }}">
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="container-fluid mt-3">
+    <div class="p-2 m-3 bg-light rounded-2 border">
+        <div class="container m-2">
+            <h1 class="display-3">Detalles Motor de Bomba {{ motor.pump.tag }}</h1>
+            <p class="lead">Incluye los detalles del Acople.</p>
+            <code><a href="{% url 'motors' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+        </div>
+    </div>
+</div>
+
+<section class="mt-4 mb-4">
+    <div class="row m-2">
+        <div class="col-md-8">
+            <div class="card m-2">
+                <div class="row m-3">
+                    <!-- Columna de la Imagen -->
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <img src="{{ motor.image.url }}" class="img-thumbnail image-motor" alt="{{ motor.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ motor.id }}">
+                        </div>
+                    </div>
+                    <!-- Columna de los campos del equipo -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- rodamientos -->
+                                {% if not motor.bearings.exists %}
+                                <p class="card-text text-danger">No hay rodamientos disponible.</p>
+                                <hr>
+                                {% else %}
+                                <p class="card-text"><strong class="objectTitle">Rodamientos</strong></p>
+                                <hr>
+                                <p class="card-text">Rodamientos Delanteros:
+                                    {% for bearing in motor.bearings.all %}
+                                        {% if bearing.bearing.side == 'rodamiento delantero' %}
+                                        <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <hr>
+                                <p class="card-text">Rodamientos Traseros:
+                                    {% for bearing in motor.bearings.all %}
+                                        {% if bearing.bearing.side == 'rodamiento trasero' %}
+                                        <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <hr>
+                                {% endif %}
+                                <!-- retenes -->
+                                {% if not motor.seal.exists %}
+                                <p class="card-text text-danger">No hay retenes disponible.</p>
+                                <hr>
+                                {% else %}
+                                <p class="card-text"><strong class="objectTitle">Retenes</strong></p>
+                                <hr>
+                                {% for seal in motor.seal.all %}
+                                    {% if seal.seal.side == 'reten delantero' %}
+                                    <p class="card-text">Reten Delantero: <span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span></p>
+                                    <hr>
+                                    {% endif %}
+                                    {% if seal.seal.side == 'reten trasero' %}
+                                    <p class="card-text">Reten Trasero: <span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span></p>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Columna datos -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Datos del Motor</strong></p>
+                                <hr>
+                                <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{motor.brand}}</span></p>
+                                <hr>
+                                <p class="card-text">Carcasa: <span class="badge bg-secondary data">{{motor.quiver}}</span></p>
+                                <hr>
+                                <p class="card-text">HP: <span class="badge bg-secondary data">{{motor.hp}}</span></p>
+                                <hr>
+                                <p class="card-text">RPM: <span class="badge bg-secondary data">{{motor.rpm}}</span></p>
+                                <hr>
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label mr-2" for="antiexplosive">Antiexplosivo</label>
+                                        <input type="checkbox" class="form-check-input" id="antiexplosive" {% if motor.antiexplosive %}checked{% endif %} disabled>
+                                    </div>
+                                </div>
+                                <hr>
+                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ motor.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fila acople -->
+            <div class="card m-2">
+                <div class="row m-3">
+                    {% if not motor.coupling_set.exists %}
+                    <p class="card-text text-danger">No hay acople disponible.</p>
+                    {% else %}
+                    <!-- Columna de la Imagen -->
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <img src="{{ coupling.image.url }}" class="img-thumbnail image-motor" alt="{{ coupling.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ coupling.id }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Acople</strong></p>
+                                <hr>
+                                <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{ coupling.brand }}</span></p>
+                                <hr>
+                                <p class="card-text">Tipo: <span class="badge bg-secondary data">{{ coupling.types }}</span></p>
+                                <hr>
+                                <p class="card-text">Serie: <span class="badge bg-secondary data">{{ coupling.series }}</span></p>
+                                <hr>
+                                <p class="card-text"><strong class="objectTitle">Medidas ejes...</strong></p>
+                                <hr>
+                                <p class="card-text">Medida Eje Motor: <span class="badge bg-secondary data">{{coupling.engine_shaft_measurement}} mm</span></p>
+                                <hr>
+                                <p class="card-text">Medida Eje Bomba: <span class="badge bg-secondary data">{{coupling.pump_shaft_measurement}} mm</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text"><strong class="objectTitle">Medidas chavetas...</strong></p>
+                                <hr>
+                                {% for coupling in motor.coupling_set.all %}
+                                <p class="card-text">Medida chaveta Motor: <span class="badge bg-secondary data">{{coupling.high_motor_key_size}} x {{coupling.width_motor_key_size}} x {{coupling.long_motor_key_size}} mm</span></p>
+                                <hr>
+                                <p class="card-text">Medida chaveta Bomba: <span class="badge bg-secondary data">{{coupling.high_pump_key_size}} x {{coupling.width_pump_key_size}} x {{coupling.long_pump_key_size}} mm</span></p>
+                                {% endfor %}
+                                <hr>
+                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ coupling.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card m-2">
+                <div class="row m-3">
+                    <h2>Obsevaciones</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla cupiditate ea nisi ipsa neque ipsam possimus voluptatum. Laboriosam, in inventore, expedita accusamus quae atque optio earum iste voluptatum quas animi.</p>
+                </div>
+                <div class="row m-3">
+                    <h2>Tareas</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt repellendus saepe excepturi? Beatae tenetur ipsam, quo, maxime rerum minus tempora itaque repellendus, quisquam repellat non placeat quibusdam? Perspiciatis, mollitia exercitationem.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

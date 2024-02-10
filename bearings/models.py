@@ -96,7 +96,9 @@ class PumpBearing(models.Model):
          Pumps, on_delete=models.CASCADE,
          null=True, blank=True, related_name='bearings'
     )
-    bearing = models.ForeignKey(Bearing, on_delete=models.CASCADE)
+    bearing = models.ForeignKey(
+        Bearing, on_delete=models.CASCADE, related_name='pump_bearings'
+    )
 
     def __str__(self):
         return f"{self.pump} - {self.bearing} - {self.bearing.side}"
@@ -107,7 +109,9 @@ class MotorBearing(models.Model):
          Motor, on_delete=models.CASCADE,
          null=True, blank=True, related_name='bearings'
     )
-    bearing = models.ForeignKey(Bearing, on_delete=models.CASCADE)
+    bearing = models.ForeignKey(
+        Bearing, on_delete=models.CASCADE, related_name='motor_bearings'
+    )
 
     def __str__(self):
         return f"{self.motor} - {self.bearing} - {self.bearing.side}"

@@ -4,7 +4,7 @@
 <section>
     <div class="container-fluid">
         <div class="p-2 m-3 bg-light rounded-2 border">
-            <div class="container">
+            <div class="container m-2">
                 <h1 class="display-3 objectTitle">{{ title }}</h1>
                 <p class="lead">Lista de {{ title }}.</p>
             </div>
@@ -12,7 +12,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="btn btn-light" href="{% if title == 'Bombas' %}{% url 'addPump' %}{% elif title == 'Motores' %}{% url 'pumps' %}{% else %}{% endif %}">+</a>
+            <a class="btn btn-light" href="{% if title == 'Bombas' %}{% url 'add_pump' %}{% elif title == 'Motores' %}{% url 'pumps' %}{% else %}{% endif %}">+</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>

@@ -2,34 +2,33 @@
 
 {% block content %}
 
-{% include 'nav.html' %}
-
 {% load static %}
-{% if messages %}
-    <div id="message-container" class="mt-4 alert alert-success" role="alert">
-        {% for message in messages %}
-            {% autoescape off %}{{ message }}{% endautoescape %}
-        {% endfor %}
+
+<div class="container-fluid mt-3">
+    <div class="p-2 m-3 bg-light rounded-2 border">
+        <div class="container m-2">
+            <h1 class="display-3">Detalles Acople de Bomba {{ coupling.pump.tag }}</h1>
+            <p class="lead">Incluye los detalles del Acople.</p>
+            <code><a href="{% url 'coupling' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+        </div>
     </div>
-{% endif %}
+</div>
+
 <section class="mt-4 mb-4">
     <div class="row m-2">
-    <div class="col-md-8">
-        {% for coupling in coupling_list %}
-        <div class="card m-2">
+        <div class="col-md-8">
+            <div class="card m-2">
                 <div class="row m-3">
                     <!-- Columna de la Imagen -->
                     <div class="col-lg-4">
                         <div class="card shadow">
-                            <img src="{{ coupling.image.url }}" class="img-thumbnail image-coupling" alt="{{ coupling.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ coupling.id }}">
+                            <img src="{{ coupling.image.url }}" class="img-thumbnail image-motor" alt="{{ coupling.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ coupling.id }}">
                         </div>
                     </div>
                     <!-- Columna de los campos del equipo -->
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <code class="data_name"><a href="{% url 'coupling_detail' coupling.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Acople de Bomba {{ coupling.pump.tag }}</strong></a></code>
-                                <hr>
                                 <p class="card-text"><strong class="objectTitle">Datos del Acople</strong></p>
                                 <hr>
                                 <p class="card-text">Medida eje lado motor: <span class="badge bg-secondary data">{{ coupling.engine_shaft_measurement }} mm</span></p>
@@ -43,7 +42,7 @@
                         </div>
                     </div>
                     <!-- Columna datos -->
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{ coupling.brand }}</span></p>
@@ -51,35 +50,28 @@
                                 <p class="card-text">Modelo de acople: <span class="badge bg-secondary data">{{ coupling.types }}</span></p>
                                 <hr>
                                 <p class="card-text">Serie: <span class="badge bg-secondary data">{{ coupling.series }}</span></p>
+                                <hr>
+                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
+                                <hr>
+                                <p class="card-text">{{ coupling.description }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Modal para la imagen de acople -->
-                <div class="modal fade" id="imagenModal{{ coupling.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="{{ coupling.image.url }}" class="img-fluid" alt="{{ coupling.image.url }}">
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card m-2">
+                <div class="row m-3">
+                    <h2>Obsevaciones</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla cupiditate ea nisi ipsa neque ipsam possimus voluptatum. Laboriosam, in inventore, expedita accusamus quae atque optio earum iste voluptatum quas animi.</p>
                 </div>
-        </div>
-        {% endfor %}
-    </div>
-    <div class="col-md-4">
-        <div class="card m-2">
-            <div class="row m-3">
-                <h2>Obsevaciones</h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla cupiditate ea nisi ipsa neque ipsam possimus voluptatum. Laboriosam, in inventore, expedita accusamus quae atque optio earum iste voluptatum quas animi.</p>
-            </div>
-            <div class="row m-3">
-                <h2>Tareas</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt repellendus saepe excepturi? Beatae tenetur ipsam, quo, maxime rerum minus tempora itaque repellendus, quisquam repellat non placeat quibusdam? Perspiciatis, mollitia exercitationem.</p>
+                <div class="row m-3">
+                    <h2>Tareas</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt repellendus saepe excepturi? Beatae tenetur ipsam, quo, maxime rerum minus tempora itaque repellendus, quisquam repellat non placeat quibusdam? Perspiciatis, mollitia exercitationem.</p>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 

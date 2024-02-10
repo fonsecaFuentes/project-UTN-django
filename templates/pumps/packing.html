@@ -16,41 +16,34 @@
     <div class="row m-2">
         <div class="col-md-8">
             <div class="row">
-            {% for seal in seals_combined %}
+            {% for packing in packing_list %}
             <div class="col-md-6">
                 <div class="card m-2">
                     <div class="row m-3">
                         <!-- Columna de la Imagen -->
                         <div class="col-12 col-md-12 col-lg-6">
                             <div class="card shadow">
-                                <img src="{{ seal.seal.image.url }}" class="img-thumbnail image-seal" alt="{{ seal.seal.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ seal.seal.id }}">
+                                <img src="{{ packing.image.url }}" class="img-thumbnail image-packing" alt="{{ packing.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ packing.id }}">
                             </div>
                         </div>
                         <!-- Columna campos -->
                         <div class="col-12 col-md-12 col-lg-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <code class="data_name"><a href="{% url 'seal_detail' seal.seal.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">{{ seal.seal.types }}</strong></a></code>
+                                    <code class="data_name"><a href="{% url 'packing_detail' packing.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Empaquetadura de Bomba {{ packing.pump.tag }}</strong></a></code>
                                     <hr>
-                                    <p class="card-text"><strong class="objectTitle">Datos del Retem</strong></p>
-                                    <hr>
-                                    <p class="card-text">Dimenciones: <span class="badge bg-secondary data"> {{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span></p>
-                                    <hr>
-                                    {% if seal.pump %}
-                                    <p class="card-text">Equipo: <span class="badge bg-secondary data">Bomba {{ seal.pump.tag }}</span></p>
-                                    {% else %}
-                                    <p class="card-text">Equipo: <span class="badge bg-secondary data">Motor de Bomba {{ seal.motor.pump.tag }}</span></p>
-                                    {% endif %}
+                                    <p class="card-text"><strong class="objectTitle">Datos Empaquetadura</strong></p>
+                                    <p class="card-text">Medida: <span class="badge bg-secondary data"> {{ packing.extention }} mm</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Modal para la imagen del rodamiento -->
-                    <div class="modal fade" id="imagenModal{{ seal.seal.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="imagenModal{{ packing.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    <img src="{{ seal.seal.image.url }}" class="img-fluid" alt="{{ seal.seal.image.url }}">
+                                    <img src="{{ packing.image.url }}" class="img-fluid" alt="{{ packing.image.url }}">
                                 </div>
                             </div>
                         </div>

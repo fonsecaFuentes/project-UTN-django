@@ -13,6 +13,7 @@ from .models import Packing
 from .forms import PumpsForm
 
 
+# Create your views here.
 def load_pump(request):
     context = {}
     if request.method == 'POST':
@@ -44,7 +45,7 @@ def load_pump(request):
     else:
         form = PumpsForm()
         context['form'] = form
-        return render(request, 'pumps/loadPumps.html', context)
+        return render(request, 'pumps/load_pumps.html', context)
 
 
 class ListPumps(View):
@@ -112,4 +113,52 @@ def pump_detail(request, pump_id):
         'motor_bearings': motor_bearings,
         'motor_seals': motor_seals,
     }
+    return render(request, template, context)
+
+
+class ListMechanicalSeal(View):
+    template = 'pumps/mechanical_seals.html'
+
+    def get(self, request):
+        mechanicalseal_list = MechanicalSeal.objects.all()
+
+        context = {
+            'title': 'Sellos Mecánico',
+            'mechanicalseal_list': mechanicalseal_list,
+        }
+        return render(request, self.template, context)
+
+
+def mechanicalseal_detail(request, mechanicalseal_id):
+    template = 'pumps/mechanicalseal_detail.html'
+    mechanicalseal = get_object_or_404(MechanicalSeal, pk=mechanicalseal_id)
+
+    context = {
+        'mechanicalseal': mechanicalseal,
+    }
+
+    return render(request, template, context)
+
+
+class ListPacking(View):
+    template = 'pumps/packing.html'
+
+    def get(self, request):
+        packing_list = Packing.objects.all()
+
+        context = {
+            'title': 'Empaquetaduras',
+            'packing_list': packing_list,
+        }
+        return render(request, self.template, context)
+
+
+def packing_detail(request, packing_id):
+    template = 'pumps/packing_detail.html'
+    packing = get_object_or_404(Packing, pk=packing_id)
+
+    context = {
+        'packing': packing,
+    }
+
     return render(request, template, context)

@@ -86,7 +86,9 @@ class PumpSeal(models.Model):
          Pumps, on_delete=models.CASCADE,
          null=True, blank=True, related_name='seal'
     )
-    seal = models.ForeignKey(Seal, on_delete=models.CASCADE)
+    seal = models.ForeignKey(
+        Seal, on_delete=models.CASCADE, related_name='pump_seal'
+    )
 
     def __str__(self):
         return f"{self.pump} - {self.seal}"
@@ -97,7 +99,9 @@ class MotorSeal(models.Model):
          Motor, on_delete=models.CASCADE,
          null=True, blank=True, related_name='seal'
     )
-    seal = models.ForeignKey(Seal, on_delete=models.CASCADE)
+    seal = models.ForeignKey(
+        Seal, on_delete=models.CASCADE, related_name='motor_seal'
+    )
 
     def __str__(self):
         return f"{self.motor} - {self.seal}"
