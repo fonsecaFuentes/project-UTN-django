@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 from django.views.generic import View
 from .models import Motor
+from pumps.models import Pumps
 from couplings.models import Coupling
 from bearings.models import MotorBearing
 from seals.models import MotorSeal
@@ -9,12 +12,39 @@ from .forms import MotorForm
 
 
 # Create your views here.
-def load_motor(request):
+def load_motor(request, pump_id):
     context = {}
+    pump = get_object_or_404(Pumps, pk=pump_id)
     if request.method == 'POST':
-        form = MotorForm(request.POST, request.FILES)
-        context['form'] = form
-        if
+        motor_form = MotorForm(request.POST, request.FILES)
+        context['motor_form'] = motor_form
+        if motor_form.is_valid():
+            brand = motor_form.cleaned_data['brand']
+            quiver = motor_form.cleaned_data['quiver']
+            hp = motor_form.cleaned_data['hp']
+            rpm = motor_form.cleaned_data['rpm']
+            antiexplosive = motor_form.cleaned_data['antiexplosive']
+            description = motor_form.cleaned_data['description']
+            image = motor_form.cleaned_data['image']
+
+            new_motor = Motor(
+                brand=brand,
+                quiver=quiver,
+                hp=hp,
+                rpm=rpm,
+                antiexplosive=antiexplosive,
+                description=description,
+                image=image
+            )
+            motor = new_motor.save(commit=False)
+            motor.pump = pump
+            motor.save()
+            messages.success(
+                request, '¡Los datos se han almacenado exitosamente!'
+            )
+            return redirect('pumps')
+
+            
 
 
 class ListMotors(View):
