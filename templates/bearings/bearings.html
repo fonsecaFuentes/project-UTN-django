@@ -17,29 +17,25 @@
         <div class="col-md-8">
             <div class="row">
             {% for bearing in bearings_combined %}
+            {% if bearing.pump %}
             <div class="col-md-6">
                 <div class="card m-2">
                     <div class="row m-3">
                         <!-- Columna de la Imagen -->
-                        <div class="col-12 col-md-12 col-lg-6">
+                        <div class="col-12 col-md-12 col-xl-6">
                             <div class="card shadow">
                                 <img src="{{ bearing.bearing.image.url }}" class="img-thumbnail image-bearing" alt="{{ bearing.bearing.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ bearing.bearing.id }}">
                             </div>
                         </div>
                         <!-- Columna campos -->
-                        <div class="col-12 col-md-12 col-lg-6">
+                        <div class="col-12 col-md-12 col-xl-6">
                             <div class="card">
                                 <div class="card-body">
                                     <code class="data_name"><a href="{% url 'bearing_detail' bearing.bearing.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">{{ bearing.bearing.types }}</strong></a></code>
                                     <hr>
-                                    <p class="card-text"><strong class="objectTitle">Datos del Rodamiento</strong></p>
                                     <p class="card-text">Numeración: <span class="badge bg-secondary data"> {{ bearing.bearing.number_reference }}</span></p>
                                     <hr>
-                                    {% if bearing.pump %}
                                     <p class="card-text">Equipo: <span class="badge bg-secondary data">Bomba {{ bearing.pump.tag }}</span></p>
-                                    {% else %}
-                                    <p class="card-text">Equipo: <span class="badge bg-secondary data">Motor de Bomba {{ bearing.motor.pump.tag }}</span></p>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -56,6 +52,43 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
+            {% if bearing.motor %}
+            <div class="col-md-6">
+                <div class="card m-2">
+                    <div class="row m-3">
+                        <!-- Columna de la Imagen -->
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="card shadow">
+                                <img src="{{ bearing.bearing.image.url }}" class="img-thumbnail image-bearing" alt="{{ bearing.bearing.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ bearing.bearing.id }}">
+                            </div>
+                        </div>
+                        <!-- Columna campos -->
+                        <div class="col-12 col-md-12 col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <code class="data_name"><a href="{% url 'bearing_detail' bearing.bearing.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">{{ bearing.bearing.types }}</strong></a></code>
+                                    <hr>
+                                    <p class="card-text">Numeración: <span class="badge bg-secondary data"> {{ bearing.bearing.number_reference }}</span></p>
+                                    <hr>
+                                    <p class="card-text">Equipo: <span class="badge bg-secondary data">Motor de Bomba {{ bearing.motor.pump.tag }}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal para la imagen del rodamiento -->
+                    <div class="modal fade" id="imagenModal{{ bearing.bearing.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <img src="{{ bearing.bearing.image.url }}" class="img-fluid" alt="{{ bearing.bearing.image.url }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             {% endfor %}
             </div>
         </div>

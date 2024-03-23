@@ -3,9 +3,11 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import View
 from django.contrib import messages
+from django.db import IntegrityError
 from .models import Pumps
 from motors.models import Motor
 from couplings.models import Coupling
+from bearings.models import Bearing
 from bearings.models import PumpBearing
 from seals.models import PumpSeal
 from .models import MechanicalSeal
@@ -15,37 +17,54 @@ from .forms import PumpsForm
 
 # Create your views here.
 def load_pump(request):
-    context = {}
+    template_name = 'pumps/load_pumps.html'
     if request.method == 'POST':
-        form = PumpsForm(request.POST, request.FILES)
-        context['form'] = form
-        if form.is_valid():
-            tag = form.cleaned_data['tag']
-            brand = form.cleaned_data['brand']
-            model = form.cleaned_data['model']
-            types = form.cleaned_data['types']
-            description = form.cleaned_data['description']
-            image = form.cleaned_data['image']
+        pump_form = PumpsForm(request.POST, request.FILES)
+        try:
+            if pump_form.is_valid():
+                pump = pump_form.save(commit=False)
+                add_bearings = request.POST.get('check_bearings') == 'true'
+                bearing_count = int(request.POST.get('bearing_count', 0))
+                print(bearing_count)
 
-            new_pump = Pumps(
-                tag=tag,
-                brand=brand,
-                model=model,
-                types=types,
-                description=description,
-                image=image
+                if add_bearings:
+                    pump.save()
+                    for bearing in range(bearing_count):
+                        side = request.POST.get(f'side_{bearing}')
+                        number_reference = request.POST.get(
+                            f'number_reference_{bearing}'
+                        )
+
+                        if side and number_reference:
+                            bearing = Bearing.objects.create(
+                                side=side, number_reference=number_reference
+                            )
+                            PumpBearing.objects.create(
+                                pump=pump, bearing=bearing
+                            )
+                else:
+                    pump.save()
+
+                messages.success(
+                    request, '¡Los datos se han almacenado exitosamente!'
+                )
+                return redirect('pumps')
+
+            else:
+                messages.error(
+                    request, '¡Hubo un error al almacenar los datos!'
+                )
+
+        except IntegrityError:
+            messages.error(
+                request, '¡Error! Ya existe una bomba en la base de datos.'
             )
-            new_pump.save()
-            messages.success(
-                request, '¡Los datos se han almacenado exitosamente!'
-            )
-            return redirect('pumps')
-        else:
-            messages.error(request, '¡Hubo un error al almacenar los datos!')
+            pump_form = PumpsForm(request.POST, request.FILES)
     else:
-        form = PumpsForm()
-        context['form'] = form
-        return render(request, 'pumps/load_pumps.html', context)
+        pump_form = PumpsForm()
+
+        context = {'pump_form': pump_form}
+        return render(request, template_name, context)
 
 
 class ListPumps(View):

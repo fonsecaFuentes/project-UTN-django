@@ -51,9 +51,24 @@
                                 <hr>
                                 <p class="card-text">Serie: <span class="badge bg-secondary data">{{ coupling.series }}</span></p>
                                 <hr>
-                                <p class="card-text"><strong class="objectTitle">Descripción</strong></p>
-                                <hr>
-                                <p class="card-text">{{ coupling.description }}</p>
+                                <div class="accordion accordion-flush" id="accordionFlushExample{{ coupling.series }}">
+                                    <div class="accordion-item">
+                                      <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{ coupling.series }}" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <strong class="objectTitle">Descripción</strong>
+                                        </button>
+                                      </h2>
+                                      <div id="flush-collapseOne{{ coupling.series }}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample{{ coupling.series }}">
+                                        {% if coupling.description %}
+                                        <div class="accordion-body">{{ coupling.description }}</div>
+                                        {% else %}
+                                        <div class="accordion-body">
+                                            <p class="card-text text-danger">No hay descripción disponible.</p>
+                                        </div>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

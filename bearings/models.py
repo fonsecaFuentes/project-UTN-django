@@ -41,15 +41,15 @@ class Bearing(models.Model):
     # Medidas de los rodamientos en mm
     # Medida interna
     inner_diameter = models.PositiveIntegerField(
-        blank=True, null=True, help_text="millimeters (mm)"
+        blank=True, null=True, help_text="milímetros (mm)"
     )
     # Medida externa
     outer_diameter = models.PositiveIntegerField(
-        blank=True, null=True, help_text="millimeters (mm)"
+        blank=True, null=True, help_text="milímetros (mm)"
     )
     # Ancho
     broad = models.PositiveIntegerField(
-        blank=True, null=True, help_text="millimeters (mm)"
+        blank=True, null=True, help_text="milímetros (mm)"
     )
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(

@@ -19,20 +19,23 @@
         <div class="card m-2">
                 <div class="row m-3">
                     <!-- Columna de la Imagen -->
-                    <div class="col-lg-4">
+                    <div class="col-xl-4">
                         <div class="card shadow">
                             <img src="{{ motor.image.url }}" class="img-thumbnail image-motor" alt="{{ motor.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ motor.id }}">
                         </div>
                     </div>
                     <!-- Columna de los campos del equipo -->
-                    <div class="col-lg-5">
+                    <div class="col-xl-5">
                         <div class="card">
                             <div class="card-body">
                                 <code class="data_name"><a href="{% url 'motor_detail' motor.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Motor de Bomba {{ motor.pump.tag }}</strong></a></code>
                                 <!-- rodamientos -->
                                 {% if not motor.has_bearing %}
                                 <hr>
-                                <p class="card-text text-danger">No hay rodamientos disponible.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-text text-danger mb-0">No hay rodamientos disponible.</p>
+                                    {% comment %} <a href="{% url 'add_bearing_motor' motor.id %}" class="btn btn-sm btn-outline-secondary">Cargar</a> {% endcomment %}
+                                </div>
                                 <hr>
                                 {% else %}
                                 <hr>
@@ -63,7 +66,7 @@
                         </div>
                     </div>
                     <!-- Columna de acople -->
-                    <div class="col-lg-3">
+                    <div class="col-xl-3">
                         <div class="card">
                             <div class="card-body">
                             <!--acople -->

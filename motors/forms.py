@@ -3,9 +3,10 @@ from .models import Motor
 
 
 class MotorForm(forms.ModelForm):
+
     class Meta:
         model = Motor
-        fiels = [
+        fields = [
             'brand',
             'quiver',
             'hp',

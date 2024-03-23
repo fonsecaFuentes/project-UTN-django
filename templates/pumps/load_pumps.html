@@ -3,19 +3,51 @@
 {% block content %}
 
 {% load static %}
+<script src="{% static 'js/numberBearings.js' %}"></script>
 
 <main class="container">
     <div class="row">
-        <div class="col-md-4 offset-md-4 mt-5">
+        <div class="col-md-8 offset-md-2 mt-5">
             <form action="{% url 'add_pump' %}" method="POST" enctype="multipart/form-data" class="card card-body shadow p-3">
                 <h2 class="text-center">Agregar Bomba</h2>
                 <code><a href="{% url 'pumps' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
                 <hr>
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-dark btn-lg">
-                    Agregar
-                </button>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{pump_form.as_p}}
+                        <hr>
+                        <div class="form-group mb-3">
+                            <label for="check_bearings">¿Agregar rodamientos?</label>
+                            <select class="form-control" name="check_bearings" id="check_bearings" required onchange="checkBearings()">
+                                <option value="">Seleccione una opción</option>
+                                <option value="true">Sí</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="bearings_section" style="display: none;">
+                        <h3 class="text-center">Rodamientos</h3>
+                        <hr>
+                        <div class="form-group mb-3">
+                            <label for="bearing_count">Cantidad de Rodamientos</label>
+                            <select class="form-control" name="bearing_count" id="bearing_count" required onchange="countBearing()">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div id="bearings">
+                            <!-- Los campos de rodamiento se generan con JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-dark btn-lg mt-2" style="width: auto;">
+                        Agregar
+                    </button>
+                </div>
             </form>
         </div>
     </div>

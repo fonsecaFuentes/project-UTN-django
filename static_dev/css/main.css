@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
    * Bootstrap  v5.2.3 (https://getbootstrap.com/)
    * Copyright 2011-2022 The Bootstrap Authors
@@ -13489,8 +13490,44 @@ body {
   font-size: 18px;
 }
 
+/* line 33, ../pump_manager/static_dev/scss/header.scss */
+fieldset {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* line 38, ../pump_manager/static_dev/scss/header.scss */
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+/* line 42, ../pump_manager/static_dev/scss/header.scss */
+#id_description {
+  margin: 0px 0px 20px 0px;
+}
+
+/* line 46, ../pump_manager/static_dev/scss/header.scss */
+#id_image {
+  margin: 0px 0px 20px 0px;
+}
+
+/* line 50, ../pump_manager/static_dev/scss/header.scss */
+.accordion-header-custom {
+  margin: 0;
+  /* Ajusta el margen según necesites */
+  padding: 0;
+  /* Ajusta el padding según necesites, este es solo un ejemplo */
+}
+
+/* line 55, ../pump_manager/static_dev/scss/header.scss */
+.accordion-button-custom {
+  padding: 5px;
+  /* Ajusta el padding del botón si es necesario */
+}
+
 @media screen and (max-width: 1440px) {
-  /* line 35, ../pump_manager/static_dev/scss/header.scss */
+  /* line 60, ../pump_manager/static_dev/scss/header.scss */
   .objectTitle {
     text-transform: uppercase;
   }

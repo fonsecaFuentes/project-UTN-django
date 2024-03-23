@@ -9,4 +9,13 @@ urlpatterns = [
         views.coupling_detail,
         name='coupling_detail'
     ),
+    path(
+        'pumps/add_coupling/<int:pump_id>/<int:motor_id>',
+        views.add_coupling, name='add_coupling'
+    ),
+    path(
+        'pumps/add_coupling_list',
+        views.add_coupling_list,
+        name='add_coupling_list'
+    )
 ]

@@ -19,122 +19,240 @@
             <div class="card m-2">
                     <div class="row m-3">
                         <!-- Columna de la Imagen -->
-                        <div class="col-lg-4">
+                        <div class="col-xl-3">
                             <div class="card shadow">
                                 <img src="{{ pump.image.url }}" class="img-thumbnail image-pump" alt="{{ pump.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ pump.id }}">
                             </div>
                         </div>
                         <!-- Columna de los campos del equipo -->
-                        <div class="col-lg-5">
+                        <div class="col-xl-5">
                             <div class="card">
                                 <div class="card-body">
-                                    <code class="data_name"><a href="{% url 'pump_detail' pump.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Bomba {{ pump.tag }}</strong></a></code>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <code class="data_name m-1">
+                                            <a href="{% url 'pump_detail' pump.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Bomba {{ pump.tag }}</strong></a>
+                                        </code>
+                                        <div>
+                                            <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                            <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                        </div>
+                                    </div>
                                     <hr>
                                     <!-- rodamientos -->
                                     {% if not pump.has_bearing %}
-                                    <p class="card-text text-danger">No hay rodamientos disponible.</p>
-                                    <hr>
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                                        Cargar
-                                    </a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text text-danger mb-0">No hay rodamientos disponible.</p>
+                                        <a href="{% url 'add_bearing' pump.id %}" class="btn btn-sm btn-outline-secondary">Cargar</a>
+                                    </div>
                                     <hr>
                                     {% else %}
-                                    <p class="card-text"><strong class="objectTitle">Rodamientos</strong></p>
-                                    <hr>
-                                    <p class="card-text">Numeración:
-                                    {% for bearing in pump.bearings.all %}
-                                        {% if bearing.bearing.side == 'rodamiento delantero' %}<span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>{% endif %}
-                                        {% if bearing.bearing.side == 'rodamiento trasero' %}| <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>{% endif %}
-                                    {% endfor %}
-                                    </p>
+                                    <div class="accordion accordion-flush" id="accordionFlushOne{{pump.id}}">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header accordion-header-custom" id="flush-headingOne">
+                                                <button class="accordion-button collapsed accordion-button-custom" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{pump.id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                    <code class="data_name">
+                                                        <a href="" style="color: inherit; cursor: pointer; text-decoration: none">
+                                                            <strong class="objectTitle">Rodamientos</strong>
+                                                        </a>
+                                                    </code>
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapseOne{{pump.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushOne{{pump.id}}">
+                                                <hr>
+                                                <p class="card-text">Numeración:
+                                                {% for bearing in pump.bearings.all %}
+                                                    {% if bearing.bearing.side == 'rodamiento delantero' %}<span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>{% endif %}
+                                                    {% if bearing.bearing.side == 'rodamiento trasero' %}| <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>{% endif %}
+                                                {% endfor %}
+                                                </p>
+                                                <hr>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr>
                                     {% endif %}
                                     <!-- sello -->
                                     {% if pump.has_mechanicalSeal %}
-                                    <p class="card-text"><strong class="objectTitle">Sello</strong></p>
-                                    <hr>
-                                    {% for mechanicalseal in pump.mechanicalseal_set.all %}
-                                    <p class="card-text">Medida: <span class="badge bg-secondary data">{{mechanicalseal.extention}} mm</span></p>
-                                    {% endfor %}
+                                    <div class="accordion accordion-flush" id="accordionFlushTwo{{pump.id}}">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header accordion-header-custom" id="flush-headingTwo">
+                                                <button class="accordion-button collapsed accordion-button-custom" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo{{pump.id}}" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                    <code class="data_name">
+                                                        <a href="" style="color: inherit; cursor: pointer; text-decoration: none">
+                                                            <strong class="objectTitle">Sello</strong>
+                                                        </a>
+                                                    </code>
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapseTwo{{pump.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushTwo{{pump.id}}">
+                                                <hr>
+                                                {% for mechanicalseal in pump.mechanicalseal_set.all %}
+                                                <p class="card-text">Medida: <span class="badge bg-secondary data">{{mechanicalseal.extention}} mm</span></p>
+                                                {% endfor %}
+                                                <hr>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr>
                                     <!-- empaquetadura -->
                                     {% elif pump.has_packing %}
-                                    <p class="card-text"><strong class="objectTitle">Empaquetadura</strong></p>
-                                    <hr>
-                                    {% for packing in pump.packing_set.all %}
-                                    <p class="card-text">Medida: <span class="badge bg-secondary data">{{packing.extention}} mm</span></p>
-                                    {% endfor %}
+                                    <div class="accordion accordion-flush" id="accordionFlushTwo{{pump.id}}">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header accordion-header-custom" id="flush-headingTwo">
+                                                <button class="accordion-button collapsed accordion-button-custom" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo{{pump.id}}" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                    <code class="data_name">
+                                                        <a href="" style="color: inherit; cursor: pointer; text-decoration: none">
+                                                            <strong class="objectTitle">Empaquetadura</strong>
+                                                        </a>
+                                                    </code>
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapseTwo{{pump.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushTwo{{pump.id}}">
+                                                <hr>
+                                                {% for packing in pump.packing_set.all %}
+                                                <p class="card-text">Medida: <span class="badge bg-secondary data">{{packing.extention}} mm</span></p>
+                                                {% endfor %}
+                                                <hr>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr>
                                     {% else %}
-                                    <p class="card-text text-danger">No hay sello o empaquetadura disponible.</p>
-                                    <hr>
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                                        Cargar
-                                    </a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text text-danger mb-0">No hay sello o empaquetadura disponible.</p>
+                                        <a href="#" class="btn btn-sm btn-outline-secondary">Cargar</a>
+                                    </div>
                                     <hr>
                                     {% endif %}
                                     <!-- retenes -->
                                     {% if not pump.has_seal %}
-                                    <p class="card-text text-danger">No hay retenes disponible.</p>
-                                    <hr>
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                                        Cargar
-                                    </a>
-                                    <hr>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text text-danger mb-0">No hay retenes disponible.</p>
+                                        <a href="#" class="btn btn-sm btn-outline-secondary">Cargar</a>
+                                    </div>
                                     {% else %}
-                                    <p class="card-text"><strong class="objectTitle">Retenes</strong></p>
-                                    <hr>
-                                    <p class="card-text">Numeración:
-                                    {% for seal in pump.seal.all %}
-                                        {% if seal.seal.side == 'reten delantero' %}<span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span>{% endif %}
-                                        {% if seal.seal.side == 'reten trasero' %}| <span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span>{% endif %}
-                                    {% endfor %}
-                                    </p>
+                                    <div class="accordion accordion-flush" id="accordionFlushThree{{pump.id}}">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header accordion-header-custom" id="flush-headingThree">
+                                                <button class="accordion-button collapsed accordion-button-custom" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree{{pump.id}}" aria-expanded="false" aria-controls="flush-collapseThree">
+                                                    <code class="data_name">
+                                                        <a href="" style="color: inherit; cursor: pointer; text-decoration: none">
+                                                            <strong class="objectTitle">Retenes</strong>
+                                                        </a>
+                                                    </code>
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapseThree{{pump.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushThree{{pump.id}}">
+                                                <hr>
+                                                {% for seal in pump.seal.all %}
+                                                    {% if seal.seal.side == 'reten delantero' %}<span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span>{% endif %}
+                                                    {% if seal.seal.side == 'reten trasero' %}| <span class="badge bg-secondary data">{{ seal.seal.inner_diameter }} x {{ seal.seal.outer_diameter }} x {{ seal.seal.broad }} mm</span>{% endif %}
+                                                {% endfor %}
+                                                <hr>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
                         <!-- Columna de motor y acople -->
-                        <div class="col-lg-3">
+                        <div class="col-xl-4">
                             <div class="card">
                                 <div class="card-body">
                                 <!--acople -->
                                 {% if not pump.has_coupling %}
-                                    <p class="card-text text-danger">No hay acople disponible.</p>
-                                    <hr>
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                                        Cargar
-                                    </a>
-                                    <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-text text-danger mb-0">No hay acople disponible.</p>
+                                    {% if pump.has_motor %}
+                                    {% for motor in pump.motor_set.all %}
+                                    <a href="{% url 'add_coupling' pump.id motor.id %}" class="btn btn-sm btn-outline-secondary">Cargar</a>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <hr>
                                 {% else %}
                                 {% for coupling in pump.coupling_set.all %}
-                                <code class="data_name"><a href="{% url 'coupling_detail' coupling.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Acople</strong></a></code>
+                                <div class="accordion accordion-flush" id="accordionFlushFour{{pump.id}}">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header accordion-header-custom" id="flush-headingFour">
+                                            <button class="accordion-button collapsed accordion-button-custom" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour{{pump.id}}" aria-expanded="false" aria-controls="flush-collapseFour">
+                                                <code class="data_name">
+                                                    <a href="{% url 'coupling_detail' coupling.id %}" style="color: inherit; cursor: pointer; text-decoration: none">
+                                                        <strong class="objectTitle">Acople</strong>
+                                                    </a>
+                                                </code>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseFour{{pump.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushFour{{pump.id}}">
+                                            <hr>
+                                            <p class="card-text">Medida Eje Motor: <span class="badge bg-secondary data">{{coupling.engine_shaft_measurement}} mm</span></p>
+                                            <hr>
+                                            <p class="card-text">Medida Eje Bomba: <span class="badge bg-secondary data">{{coupling.pump_shaft_measurement}} mm</span></p>
+                                            <hr>
+                                            <div>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <hr>
-                                    <p class="card-text">Medida Eje Motor: <span class="badge bg-secondary data">{{coupling.engine_shaft_measurement}} mm</span></p>
-                                    <hr>
-                                    <p class="card-text">Medida Eje Bomba: <span class="badge bg-secondary data">{{coupling.pump_shaft_measurement}} mm</span></p>
-                                    <hr>
                                 {% endfor %}
                                 {% endif %}
                                 <!--motor -->
                                 {% if not pump.has_motor %}
-                                    <p class="card-text text-danger">No hay motor disponible.</p>
-                                    <hr>
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                                        Cargar
-                                    </a>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-text text-danger mb-0">No hay motor disponible.</p>
+                                    <a href="{% url 'add_motor' pump.id %}" class="btn btn-sm btn-outline-secondary">Cargar</a>
+                                </div>
                                 {% else %}
                                 {% for motor in pump.motor_set.all %}
-                                    <code class="data_name"><a href="{% url 'motor_detail' motor.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Motor</strong></a></code>
-                                    <hr>
-                                    <p class="card-text">HP: <span class="badge bg-secondary data">{{ motor.hp }}</span></p>
-                                    <hr>
-                                    <p class="card-text">RPM: <span class="badge bg-secondary data">{{ motor.rpm }}</span></p>
-                                    <hr>
-                                    <div class="form-group">
-                                        <div class="form-check form-check-inline">
-                                            <label class="form-check-label mr-2" for="antiexplosive">Antiexplosivo</label>
-                                            <input type="checkbox" class="form-check-input" id="antiexplosive" {% if motor.antiexplosive %}checked{% endif %} disabled>
+                                    <div class="accordion accordion-flush" id="accordionFlushFive{{pump.id}}">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header accordion-header-custom" id="flush-headingFive">
+                                                <button class="accordion-button collapsed accordion-button-custom" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive{{pump.id}}" aria-expanded="false" aria-controls="flush-collapseFive">
+                                                    <code class="data_name">
+                                                        <a href="{% url 'motor_detail' motor.id %}" style="color: inherit; cursor: pointer; text-decoration: none">
+                                                            <strong class="objectTitle">Motor</strong>
+                                                        </a>
+                                                    </code>
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapseFive{{pump.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushFive{{pump.id}}">
+                                                <hr>
+                                                <p class="card-text">HP: <span class="badge bg-secondary data">{{ motor.hp }}</span></p>
+                                                <hr>
+                                                <p class="card-text">RPM: <span class="badge bg-secondary data">{{ motor.rpm }}</span></p>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <label class="form-check-label mr-2" for="antiexplosive">Antiexplosivo</label>
+                                                        <input type="checkbox" class="form-check-input" id="antiexplosive" {% if motor.antiexplosive %}checked{% endif %} disabled>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 {% endfor %}

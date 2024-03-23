@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+<script src="{% static 'js/checkPumpMotor.js' %}"></script>
+
+{% if messages %}
+    <div id="message-container" class="mt-4 alert alert-success" role="alert">
+        {% for message in messages %}
+            {% autoescape off %}{{ message }}{% endautoescape %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mt-5">
+            <form action="" method="POST" enctype="multipart/form-data" class="card card-body shadow p-3">
+                <h2 class="text-center">Agregar Rodamiento</h2>
+                <code><a href="{% url 'bearings' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+                <hr>
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="equipment_check">¿Agregar rodamientos de motor o bomba?</label>
+                    <select class="form-control" name="equipment_check" id="equipment_check" required onchange="checkPumpOrMotor()">
+                        <option value="">Seleccione una opción</option>
+                        <option value="pump">Bomba</option>
+                        <option value="motor">Motor</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group mb-3" id="equipment_pump" style="display: none;">
+                    <label for="pump">Bomba:</label>
+                    <select class="form-control" id="pump" name="pump">
+                    <option value="" selected disabled>Seleccione una bomba</option>
+                    {% for pump in pumps_with_bearings %}
+                        <option value="{{ pump.pk }}">{{ pump.tag }}</option>
+                    {% endfor %}
+                    </select>
+                    <hr>
+                </div>
+                <div class="form-group mb-3" id="equipment_motor" style="display: none;">
+                    <label for="motor">Motor:</label>
+                    <select class="form-control" id="motor" name="motor">
+                    <option value="" selected disabled>Seleccione un motor</option>
+                    {% for motor in motors_with_bearings %}
+                        <option value="{{ motor.pk }}">{{ motor.quiver }} de bomba {{motor.pump.tag}}</option>
+                    {% endfor %}
+                    </select>
+                    <hr>
+                </div>
+                <div class="form-group mb-3" id="count_bearings" style="display: none;">
+                    <label for="bearing_count">Cantidad de Rodamientos</label>
+                    <select class="form-control" name="bearing_count" id="bearing_count" onchange="updateBearingsFields()">
+                        <option value="">Seleccione una opción</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <hr>
+                </div>
+                <div id="bearings">
+                    <!-- Los campos de rodamiento se generan con JavaScript -->
+                </div>
+                <br>
+                {{bearing_form.as_p}}
+                <br>
+                <button type="submit" class="btn btn-dark btn-lg">
+                    Agregar
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form action="" method="POST" enctype="multipart/form-data" class="card card-body shadow p-3">
+                <h2 class="text-center">Agregar Motor</h2>
+                <code><a href="{% url 'motors' %}" style="color: inherit; cursor: pointer; text-decoration: none">volver...</a></code>
+                <hr>
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="pump">Bomba:</label>
+                    <select class="form-control" id="pump" name="pump" required>
+                        <option value="" selected disabled>Seleccione una bomba</option>
+                        {% for pump in available_pumps %}
+                            <option value="{{ pump.pk }}">{{ pump.tag }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {{motor_form.as_p}}
+                <button type="submit" class="btn btn-dark btn-lg">
+                    Agregar
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

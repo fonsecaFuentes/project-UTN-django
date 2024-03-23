@@ -42,7 +42,7 @@
                                 {% endfor %}
                                 <hr>
                                 <p class="card-text">
-                                    {% if bearing.side == 'rodamiento delantero' %}Rodamientos Delanteros: <span class="badge bg-secondary data">{{ bearing.number_reference }}</span>{% else %}Rodamientos Traseros: <span class="badge bg-secondary data">{{ bearing.bearing.number_reference }}</span>
+                                    {% if bearing.side == 'rodamiento delantero' %}Rodamientos Delantero: <span class="badge bg-secondary data">{{ bearing.number_reference }}</span>{% elif bearing.side == 'rodamiento trasero' %}Rodamientos Trasero: <span class="badge bg-secondary data">{{ bearing.number_reference }}</span>
                                     {% endif %}
                                 </p>
                                 <hr>

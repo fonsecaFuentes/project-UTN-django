@@ -26,40 +26,32 @@ class Coupling(models.Model):
     # medidas mecanizado eje del lado bomba y motor
     # medida bomba
     pump_shaft_measurement = models.PositiveIntegerField(
-        blank=True, null=True, help_text="medida eje lado bomba (mm)"
-    )
+        blank=True, null=True)
     # medida motor
     engine_shaft_measurement = models.PositiveIntegerField(
-        blank=True, null=True, help_text="medida eje lado motor (mm)"
-    )
+        blank=True, null=True)
 
     # medidas chaveta lado bomba
     # medida alto
     high_pump_key_size = models.PositiveIntegerField(
-        blank=True, null=True, help_text="chaveta medida alto (mm)"
-    )
+        blank=True, null=True)
     # medida ancho
     width_pump_key_size = models.PositiveIntegerField(
-        blank=True, null=True, help_text="chaveta medida ancho (mm)"
-    )
+        blank=True, null=True)
     # medida largo
     long_pump_key_size = models.PositiveIntegerField(
-        blank=True, null=True, help_text="chaveta medida largo (mm)"
-    )
+        blank=True, null=True)
 
     # medidas chaveta lado motor
     # medida alto
     high_motor_key_size = models.PositiveIntegerField(
-        blank=True, null=True, help_text="chaveta medida alto (mm)"
-    )
+        blank=True, null=True)
     # medida ancho
     width_motor_key_size = models.PositiveIntegerField(
-        blank=True, null=True, help_text="chaveta medida ancho (mm)"
-    )
+        blank=True, null=True)
     # medida largo
     long_motor_key_size = models.PositiveIntegerField(
-        blank=True, null=True, help_text="chaveta medida largo (mm)"
-    )
+        blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(
         default='acoples/default/mechanical_coupling.png',

@@ -19,13 +19,13 @@
         <div class="card m-2">
                 <div class="row m-3">
                     <!-- Columna de la Imagen -->
-                    <div class="col-lg-4">
+                    <div class="col-xl-4">
                         <div class="card shadow">
                             <img src="{{ coupling.image.url }}" class="img-thumbnail image-coupling" alt="{{ coupling.image.url }}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ coupling.id }}">
                         </div>
                     </div>
                     <!-- Columna de los campos del equipo -->
-                    <div class="col-lg-4">
+                    <div class="col-xl-4">
                         <div class="card">
                             <div class="card-body">
                                 <code class="data_name"><a href="{% url 'coupling_detail' coupling.id %}" style="color: inherit; cursor: pointer; text-decoration: none"><strong class="objectTitle">Acople de Bomba {{ coupling.pump.tag }}</strong></a></code>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <!-- Columna datos -->
-                    <div class="col-lg-3">
+                    <div class="col-xl-3">
                         <div class="card">
                             <div class="card-body">
                                 <p class="card-text">Fabricante: <span class="badge bg-secondary data">{{ coupling.brand }}</span></p>
