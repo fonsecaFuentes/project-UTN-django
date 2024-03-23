@@ -42,7 +42,7 @@
                                     {% if not pump.has_bearing %}
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p class="card-text text-danger mb-0">No hay rodamientos disponible.</p>
-                                        <a href="{% url 'add_bearing' pump.id %}" class="btn btn-sm btn-outline-secondary">Cargar</a>
+                                        <a href="{% url 'add_bearing' pump.id %}" class="btn btn-sm btn-outline-secondary linkPump">Cargar</a>
                                     </div>
                                     <hr>
                                     {% else %}

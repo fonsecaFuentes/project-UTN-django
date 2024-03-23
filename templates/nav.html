@@ -19,7 +19,7 @@
             {% elif title == 'Acoples' and pumps_with_motor_and_coupling %}
             <a class="btn btn-light" href="{% url 'add_coupling_list' %}">+</a>
             {% elif title == 'Rodamientos' and pumps_with_bearings and motors_with_bearings%}
-            <a class="btn btn-light" href="{% url 'add_bearing' %}">+</a>
+            <a class="btn btn-light" id="linkBearing" href="{% url 'add_bearing' %}">+</a>
             {% endif %}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

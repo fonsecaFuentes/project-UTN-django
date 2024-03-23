@@ -78,20 +78,19 @@ function updateBearingsFields() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Asegúrate de que todos tus elementos existen en este punto
     const equipmentCheckElement = document.getElementById('equipment_check');
     const bearingCountElement = document.getElementById('bearing_count');
 
     if (equipmentCheckElement) {
         equipmentCheckElement.addEventListener('change', checkPumpOrMotor);
     } else {
-        console.error('Elemento #equipment_check no encontrado.');
+        console.error('elemento no encontrado.');
     }
 
     if (bearingCountElement) {
         bearingCountElement.addEventListener('change', updateBearingsFields);
     } else {
-        console.error('Elemento #bearing_count no encontrado.');
+        console.error('elemento no encontrado.');
     }
 });
 
